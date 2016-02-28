@@ -33,4 +33,8 @@ public class Point {
     public double distance(double x, double y) {
         return Math.sqrt(x * x + y * y);
     }
+
+    public Point() {
+
+    }
 }
