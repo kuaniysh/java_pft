@@ -12,7 +12,17 @@ public class NavigationHelper extends HelperBase {
         super(wd);
     }
 
+    /**
+     * Переход в каталог groups
+     */
     public void gotoGroupPage() {
         click(By.linkText("groups"));
+    }
+
+    /**
+     * Переход в каталог home
+     */
+    public void gotoHomePage() {
+        click(By.linkText("home"));
     }
 }

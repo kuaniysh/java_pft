@@ -39,4 +39,53 @@ public class ContactHelper extends HelperBase {
     public void clickToEnter() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
+
+    /**
+     * Выбрать контакт
+     */
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    /**
+     * Возврат в каталог home
+     */
+    public void returnToHomePage() {
+        click(By.linkText("home"));
+    }
+
+    /**
+     * Удаляет контакт
+     */
+    public void deleteSelectedContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+        wd.switchTo().alert().accept();
+    }
+
+    /**
+     * Нажимает на иконку для редактирования контакта
+     */
+    public void modifySelectedContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    /**
+     * Заполняет поля контакта
+     *
+     * @param newContactData объект типа NewContactData
+     */
+    public void fillContactForm(NewContactData newContactData) {
+        type(By.name("firstname"), newContactData.getName());
+        type(By.name("middlename"), newContactData.getMiddleName());
+        type(By.name("lastname"), newContactData.getLastName());
+        type(By.name("nickname"), newContactData.getNickName());
+        type(By.name("mobile"), newContactData.getTelephone());
+    }
+
+    /**
+     * Нажав на обновить обновляет отредактированный контакт
+     */
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }
