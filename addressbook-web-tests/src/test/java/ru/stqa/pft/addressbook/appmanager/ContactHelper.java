@@ -1,8 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 /**
@@ -12,19 +15,6 @@ public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
-    }
-
-    /**
-     * Метод для заполнения данных нового контакта
-     *
-     * @param newContactData
-     */
-    public void fillNewContact(NewContactData newContactData) {
-        type(By.name("firstname"), newContactData.getName());
-        type(By.name("middlename"), newContactData.getMiddleName());
-        type(By.name("lastname"), newContactData.getLastName());
-        type(By.name("nickname"), newContactData.getNickName());
-        type(By.name("mobile"), newContactData.getTelephone());
     }
 
     /**
@@ -74,12 +64,18 @@ public class ContactHelper extends HelperBase {
      *
      * @param newContactData объект типа NewContactData
      */
-    public void fillContactForm(NewContactData newContactData) {
+    public void fillContactForm(NewContactData newContactData, boolean creation) {
         type(By.name("firstname"), newContactData.getName());
         type(By.name("middlename"), newContactData.getMiddleName());
         type(By.name("lastname"), newContactData.getLastName());
         type(By.name("nickname"), newContactData.getNickName());
         type(By.name("mobile"), newContactData.getTelephone());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     /**
