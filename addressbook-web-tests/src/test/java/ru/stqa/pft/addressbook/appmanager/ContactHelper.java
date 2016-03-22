@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,10 @@ public class ContactHelper extends HelperBase {
      */
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value = '"+ id +"']")).click();
     }
 
     /**
@@ -100,6 +105,28 @@ public class ContactHelper extends HelperBase {
         returnToHomePage();
     }
 
+    public void modifyContact(int index, ContactData contactData) {
+        selectContact(index);
+        modifySelectedContact();
+        fillContactForm(contactData, false);
+        submitContactModification();
+        returnToHomePage();
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        modifySelectedContact();
+        deleteSelectedContact();
+        returnToHomePage();
+    }
+
+    public void deleteWithAccept(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteSelectedContact();
+        accept();
+        returnToHomePage();
+    }
+
     /**
      * Метод который проверяет существует ли контакт
      *
@@ -113,7 +140,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
@@ -121,7 +148,21 @@ public class ContactHelper extends HelperBase {
             String lastName = element.findElement(By.xpath("./td[2]")).getText();
             String telephone = element.findElement(By.xpath("./td[6]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            ContactData contact = new ContactData(id, name, null, lastName, null, telephone);
+            ContactData contact = new ContactData().withId(id).withName(name).withLastName(lastName).withTelephone(telephone);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            String name = element.findElement(By.xpath("./td[3]")).getText();
+            String lastName = element.findElement(By.xpath("./td[2]")).getText();
+            String telephone = element.findElement(By.xpath("./td[6]")).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            ContactData contact = new ContactData().withId(id).withName(name).withLastName(lastName).withTelephone(telephone);
             contacts.add(contact);
         }
         return contacts;

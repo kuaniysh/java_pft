@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by kuanysh on 01.03.16.
@@ -16,7 +15,7 @@ public class NavigationHelper extends HelperBase {
     /**
      * Переход в каталог groups
      */
-    public void gotoGroupPage() {
+    public void groupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))) {
@@ -28,7 +27,7 @@ public class NavigationHelper extends HelperBase {
     /**
      * Переход в каталог home
      */
-    public void gotoHomePage() {
+    public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
