@@ -13,7 +13,7 @@ public class ContactAddTest extends TestBase {
     public void testAddContact() {
         Contacts before = app.contact().all();
         ContactData contactData = new ContactData()
-                .withName("TestName")
+                .withFirstname("TestName")
                 .withMiddleName("MiddleName")
                 .withLastName("LastName")
                 .withNickName("NickName")

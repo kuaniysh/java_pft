@@ -19,7 +19,7 @@ public class ContactModificationTest extends TestBase {
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {
             app.contact().createContact(new ContactData()
-                    .withName("TestName")
+                    .withFirstname("TestName")
                     .withMiddleName("MiddleName")
                     .withLastName("LastName")
                     .withNickName("NickName")
@@ -34,7 +34,7 @@ public class ContactModificationTest extends TestBase {
         ContactData modifiedContact = before.iterator().next();
         int index = before.size() - 1;
         ContactData contact = new ContactData()
-                .withId(modifiedContact.getId()).withName("TestName").withTelephone("767854345");
+                .withId(modifiedContact.getId()).withFirstname("TestName").withTelephone("767854345");
         app.contact().modifyContact(index, contact);
         Contacts after = app.contact().all();
         assertEquals(after.size(), before.size());
