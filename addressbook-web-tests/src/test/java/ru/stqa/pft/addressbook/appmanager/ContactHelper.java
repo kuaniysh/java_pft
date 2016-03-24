@@ -67,6 +67,13 @@ public class ContactHelper extends HelperBase {
     }
 
     /**
+     * Нажимает на иконку для детали контакта
+     */
+    public void detailsSelectedContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
+    }
+
+    /**
      * Заполняет поля контакта
      *
      * @param contactData объект типа ContactData
@@ -174,15 +181,13 @@ public class ContactHelper extends HelperBase {
             String firstname = cells.get(2).getText();
             String address = cells.get(3).getText();
             String email = cells.get(4).getText();
-            String[] phones = cells.get(5).getText().split("\n");
+            String allPhones = cells.get(5).getText();
 
             ContactData contact = new ContactData()
                     .withId(id)
                     .withFirstname(firstname)
                     .withLastName(lastName)
-                    .withHomePhone(phones[0])
-                    .withMobilePhone(phones[1])
-                    .withWorkPhone(phones[2])
+                    .withAllPhones(allPhones)
                     .withAddress(address)
                     .withEmail(email);
             contactCache.add(contact);
