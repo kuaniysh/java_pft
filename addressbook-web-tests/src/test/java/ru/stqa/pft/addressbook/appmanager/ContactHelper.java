@@ -42,7 +42,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector("input[value = '"+ id +"']")).click();
+        wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
     }
 
     /**
@@ -91,7 +91,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), contactData.getEmail3());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (isElementPresent(By.name("new_group"))) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -238,8 +241,8 @@ public class ContactHelper extends HelperBase {
         return wd.findElement(By.id("content")).getText();
     }
 
-    private void initContactDetailsById(int id){
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+    private void initContactDetailsById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(6).findElement(By.tagName("a")).click();

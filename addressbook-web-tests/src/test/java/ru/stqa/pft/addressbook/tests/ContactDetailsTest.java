@@ -30,7 +30,7 @@ public class ContactDetailsTest extends TestBase {
                     .withEmail("test_1@mail.ru")
                     .withEmail2("test_2@yandex.ru")
                     .withEmail3("test_3@gmail.com")
-                    .withGroup("test1");
+                    .withGroup("[none]");
             app.contact().createContact(contactData, true);
         }
     }
@@ -73,11 +73,10 @@ public class ContactDetailsTest extends TestBase {
     private String mergeEmails(ContactData contact) {
         String[] getEmail = contact.getEmail().split("@");
         String[] getEmail1 = contact.getEmail2().split("@");
-        String[] getEmail2 = contact.getEmail3().split("@");
         return Arrays.asList(
                 contact.getEmail() + " (www." + getEmail[1] + ")",
                 contact.getEmail2() + " (www." + getEmail1[1] + ")",
-                contact.getEmail3() + " (www." + getEmail2[1] + ")")
+                contact.getEmail3())
                 .stream()
                 .filter((s) -> !s.equals(""))
                 .map(ContactDetailsTest::cleaned)

@@ -16,6 +16,10 @@ public class ContactData {
     private String allEmails;
     private String email2;
     private String email3;
+    private String lastName;
+    private String nickName;
+    private String telephone;
+    private String group;
 
     @Override
     public boolean equals(Object o) {
@@ -37,11 +41,6 @@ public class ContactData {
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
         return result;
     }
-
-    private String lastName;
-    private String nickName;
-    private String telephone;
-    private String group;
 
     public String getFirstName() {
         return name;
