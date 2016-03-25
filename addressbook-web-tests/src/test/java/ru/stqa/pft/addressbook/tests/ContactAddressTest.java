@@ -18,6 +18,5 @@ public class ContactAddressTest extends TestBase {
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-        assertThat(contact.getEmail(), equalTo(contactInfoFromEditForm.getEmail()));
     }
 }
