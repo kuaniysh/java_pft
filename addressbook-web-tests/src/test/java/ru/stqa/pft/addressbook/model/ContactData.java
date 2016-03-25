@@ -43,7 +43,7 @@ public class ContactData {
     private String telephone;
     private String group;
 
-    public String getName() {
+    public String getFirstName() {
         return name;
     }
 
