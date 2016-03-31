@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
+
 /**
  * Класс который описывает новый контакт
  */
@@ -20,6 +22,7 @@ public class ContactData {
     private String nickName;
     private String telephone;
     private String group;
+    private File photo;
 
     @Override
     public boolean equals(Object o) {
@@ -104,6 +107,10 @@ public class ContactData {
 
     public String getEmail3() {
         return email3;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     @Override
@@ -193,6 +200,11 @@ public class ContactData {
 
     public ContactData withEmail3(String email3) {
         this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 }
