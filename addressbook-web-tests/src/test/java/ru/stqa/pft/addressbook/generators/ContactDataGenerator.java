@@ -73,6 +73,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("firstName %s", i))
                     .withAddress(String.format("address %s", i))
+                    .withGroup("[none]")
                     .withMobilePhone(String.format("mobilePhone %s", i)));
         }
         return contacts;

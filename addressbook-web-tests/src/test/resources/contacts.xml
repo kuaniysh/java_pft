@@ -1,8 +1,23 @@
 <list>
-  <ru.stqa.pft.addressbook.model.ContactData>
+  <contacts>
     <id>2147483647</id>
     <name>firstName 0</name>
     <mobilePhone>mobilePhone 0</mobilePhone>
     <address>address 0</address>
-  </ru.stqa.pft.addressbook.model.ContactData>
+    <group>[none]</group>
+  </contacts>
+  <contacts>
+    <id>2147483647</id>
+    <name>firstName 1</name>
+    <mobilePhone>mobilePhone 1</mobilePhone>
+    <address>address 1</address>
+    <group>[none]</group>
+  </contacts>
+  <contacts>
+    <id>2147483647</id>
+    <name>firstName 2</name>
+    <mobilePhone>mobilePhone 2</mobilePhone>
+    <address>address 2</address>
+    <group>[none]</group>
+  </contacts>
 </list>
