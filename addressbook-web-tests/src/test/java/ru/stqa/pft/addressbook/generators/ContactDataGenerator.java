@@ -43,7 +43,7 @@ public class ContactDataGenerator {
         List<ContactData> contacts = generateContacts(count);
         if (format.equals("csv")) {
             saveAsCsv(contacts, new File(file));
-        } else if (format.equals("xml")){
+        } else if (format.equals("xml")) {
             saveAsXml(contacts, new File(file));
         } else {
             System.out.println("Unrecognized format " + format);
@@ -54,18 +54,18 @@ public class ContactDataGenerator {
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactData.class);
         String xml = xstream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
         System.out.println(new File(".").getAbsoluteFile());
-        Writer writer = new FileWriter(file);
-        for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getAddress(), contact.getMobilePhone()));
+        try (Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getAddress(), contact.getMobilePhone()));
+            }
         }
-        writer.close();
     }
 
     private List<ContactData> generateContacts(int count) {
