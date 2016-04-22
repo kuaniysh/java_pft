@@ -9,28 +9,28 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by kuanysh on 02.03.16.
+ * Created by kuanysh on 20.04.16.
  */
-public class GroupModificationTests extends TestBase {
-
+public class GroupModificationTestsDb extends TestBase {
+    
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
-            app.group().create(new GroupData().withName("test 1"));
+            app.group().create(new GroupData().withName("test").withHeader("test2").withFooter(null));
+        } else {
+            app.goTo().groupPage();
         }
     }
 
     @Test
-    public void testGroupModification() {
+    public void testGroupModificationDb() {
         Groups before = app.db().groups();
-        GroupData modifiedGroup = before.iterator().next();
-        GroupData group = new GroupData()
-                .withId(modifiedGroup.getId()).withName("test 1").withHeader("test 2").withFooter("test 3");
-        app.goTo().groupPage();
+        GroupData modifyGroup = before.iterator().next();
+        GroupData group = new GroupData().withName("tes8").withHeader("test12").withFooter("test45").withId(modifyGroup.getId());
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(before.size()));
         Groups after = app.db().groups();
-        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+        assertThat(after, equalTo(before.without(modifyGroup).withAdded(group)));
     }
 }

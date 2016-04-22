@@ -21,7 +21,7 @@ public class ContactAddTest extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
-        try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
             String xml = "";
             String line = reader.readLine();
             while (line != null) {
@@ -46,6 +46,20 @@ public class ContactAddTest extends TestBase {
         Contacts after = app.contact().all();
         assertThat(after.size(), equalTo(before.size() + 1));
 
+        assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+    }
+
+    @Test
+    public void testContactCreationDb() {
+        app.goTo().homePage();
+        Contacts before = app.db().contacts();
+        ContactData contact = new ContactData().withFirstname("TestFirstName").withLastName("TestLastName")
+                .withMiddleName("TestMiddleName").withMobilePhone("79177121162");
+
+        app.contact().createContact(contact, true);
+        Contacts after = app.db().contacts();
+        app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 }

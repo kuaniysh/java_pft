@@ -73,6 +73,14 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
     }
 
+    public void editSelectionContactById(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+    }
+
+    public void updateContact() {
+        click(By.cssSelector("input[value='Update']"));
+    }
+
     /**
      * Заполняет поля контакта
      *
@@ -129,6 +137,13 @@ public class ContactHelper extends HelperBase {
         submitContactModification();
         contactCache = null;
         returnToHomePage();
+    }
+
+    public void modify(ContactData contact, boolean c) {
+        editSelectionContactById(contact.getId());
+        fillContactForm((contact), c);
+        updateContact();
+        contactCache = null;
     }
 
     public void delete(ContactData contact) {
