@@ -28,7 +28,7 @@ public class ContactAddTestsDb extends TestBase {
         app.goTo().homePage();
         Contacts before = app.db().contacts();
         ContactData contact = new ContactData().withFirstname("Test").withLastName("Test")
-                .withMiddleName("Test").withMobilePhone("79177121162");
+                .withMiddleName("Test").withMobilePhone("79177121162").withGroup("test1");
 
         app.contact().createContact(contact, true);
         Contacts after = app.db().contacts();
